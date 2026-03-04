@@ -4,12 +4,8 @@ server:
 spring:
   application:
     name: eolma-user
-
-  datasource:
-    url: jdbc:postgresql://localhost:5432/eolma_user
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
 
   jpa:
     hibernate:
@@ -25,13 +21,7 @@ spring:
       mode: always
       schema-locations: classpath:schema.sql
 
-  data:
-    redis:
-      host: localhost
-      port: 6379
-
   kafka:
-    bootstrap-servers: localhost:9092
     producer:
       acks: all
       properties:
@@ -40,11 +30,5 @@ spring:
         retries: 3
 
 jwt:
-  secret: eolma-user-jwt-secret-key-for-hs256-must-be-at-least-256-bits-long
   access-token-expiration: 1800000   # 30min
   refresh-token-expiration: 604800000 # 7days
-
-logging:
-  level:
-    com.eolma.user: DEBUG
-    org.springframework.security: DEBUG
