@@ -1,0 +1,50 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: eolma-user
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/eolma_user
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        default_schema: public
+        format_sql: true
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      acks: all
+      properties:
+        enable.idempotence: true
+        max.in.flight.requests.per.connection: 5
+        retries: 3
+
+jwt:
+  secret: eolma-user-jwt-secret-key-for-hs256-must-be-at-least-256-bits-long
+  access-token-expiration: 1800000   # 30min
+  refresh-token-expiration: 604800000 # 7days
+
+logging:
+  level:
+    com.eolma.user: DEBUG
+    org.springframework.security: DEBUG
