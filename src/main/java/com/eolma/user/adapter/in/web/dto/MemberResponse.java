@@ -2,13 +2,17 @@ package com.eolma.user.adapter.in.web.dto;
 
 import com.eolma.user.domain.model.Member;
 
+import java.time.Instant;
+
 public record MemberResponse(
         Long id,
         String email,
         String nickname,
         String profileImage,
         String role,
-        String status
+        String status,
+        Instant createdAt,
+        Instant updatedAt
 ) {
 
     public static MemberResponse from(Member member) {
@@ -18,7 +22,9 @@ public record MemberResponse(
                 member.getNickname(),
                 member.getProfileImage(),
                 member.getRole().name(),
-                member.getStatus().name()
+                member.getStatus().name(),
+                member.getCreatedAt(),
+                member.getUpdatedAt()
         );
     }
 }
