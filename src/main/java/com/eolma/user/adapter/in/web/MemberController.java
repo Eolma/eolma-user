@@ -1,6 +1,7 @@
 package com.eolma.user.adapter.in.web;
 
 import com.eolma.user.adapter.in.web.dto.MemberResponse;
+import com.eolma.user.adapter.in.web.dto.PublicMemberResponse;
 import com.eolma.user.adapter.in.web.dto.UpdateProfileRequest;
 import com.eolma.user.application.usecase.GetMemberProfileUseCase;
 import com.eolma.user.application.usecase.UpdateMemberProfileUseCase;
@@ -21,6 +22,12 @@ public class MemberController {
                             UpdateMemberProfileUseCase updateMemberProfileUseCase) {
         this.getMemberProfileUseCase = getMemberProfileUseCase;
         this.updateMemberProfileUseCase = updateMemberProfileUseCase;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PublicMemberResponse> getPublicProfile(@PathVariable Long id) {
+        Member member = getMemberProfileUseCase.execute(id);
+        return ResponseEntity.ok(PublicMemberResponse.from(member));
     }
 
     @GetMapping("/me")
