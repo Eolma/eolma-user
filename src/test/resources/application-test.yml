@@ -17,6 +17,14 @@ jwt:
   access-token-expiration: 1800000
   refresh-token-expiration: 604800000
 
+oauth:
+  google:
+    client-id: test-google-client-id
+    client-secret: test-google-client-secret
+  kakao:
+    client-id: test-kakao-client-id
+    client-secret: test-kakao-client-secret
+
 logging:
   level:
     com.eolma.user: DEBUG

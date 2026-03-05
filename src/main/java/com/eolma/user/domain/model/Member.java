@@ -21,10 +21,10 @@ public class Member {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password_hash", nullable = false)
+    @Column(name = "password_hash")
     private String passwordHash;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(unique = true, length = 50)
     private String nickname;
 
     @Column(name = "profile_image", length = 500)
@@ -55,6 +55,21 @@ public class Member {
         this.updatedAt = Instant.now();
     }
 
+    public static Member createSocialMember(String email) {
+        Member member = new Member();
+        member.email = email;
+        member.role = MemberRole.USER;
+        member.status = MemberStatus.ACTIVE;
+        member.createdAt = Instant.now();
+        member.updatedAt = Instant.now();
+        return member;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+        this.updatedAt = Instant.now();
+    }
+
     public void updateProfile(String nickname, String profileImage) {
         if (nickname != null) {
             this.nickname = nickname;
@@ -67,5 +82,13 @@ public class Member {
 
     public boolean isActive() {
         return this.status == MemberStatus.ACTIVE;
+    }
+
+    public boolean hasPassword() {
+        return this.passwordHash != null;
+    }
+
+    public boolean hasNickname() {
+        return this.nickname != null;
     }
 }
