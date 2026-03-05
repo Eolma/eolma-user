@@ -39,16 +39,16 @@ public class LoginUseCase {
     public LoginResponse execute(String email, String password) {
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new EolmaException(ErrorType.UNAUTHORIZED,
-                        "Invalid email or password"));
+                        "이메일 또는 비밀번호가 올바르지 않습니다"));
 
         if (!member.isActive()) {
             throw new EolmaException(ErrorType.FORBIDDEN,
-                    "Account is not active");
+                    "비활성화된 계정입니다");
         }
 
         if (!passwordEncoder.matches(password, member.getPasswordHash())) {
             throw new EolmaException(ErrorType.UNAUTHORIZED,
-                    "Invalid email or password");
+                    "이메일 또는 비밀번호가 올바르지 않습니다");
         }
 
         String accessToken = tokenProvider.createAccessToken(member);

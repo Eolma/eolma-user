@@ -37,12 +37,12 @@ public class RegisterMemberUseCase {
     public Member execute(String email, String password, String nickname) {
         if (memberRepository.existsByEmail(email)) {
             throw new EolmaException(ErrorType.DUPLICATE_EMAIL,
-                    "Email already in use");
+                    "이미 사용 중인 이메일입니다");
         }
 
         if (memberRepository.existsByNickname(nickname)) {
             throw new EolmaException(ErrorType.INVALID_REQUEST,
-                    "Nickname already in use");
+                    "이미 사용 중인 닉네임입니다");
         }
 
         Member member = Member.builder()
