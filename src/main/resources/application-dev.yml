@@ -14,15 +14,15 @@ spring:
     bootstrap-servers: localhost:9092
 
 jwt:
-  secret: eolma-dev-secret-key-minimum-256-bits-for-hmac-sha256-algorithm
+  secret: ${JWT_SECRET}
 
 oauth:
   google:
-    client-id: your-google-client-id
-    client-secret: your-google-client-secret
+    client-id: ${OAUTH_GOOGLE_CLIENT_ID:}
+    client-secret: ${OAUTH_GOOGLE_CLIENT_SECRET:}
   kakao:
-    client-id: your-kakao-client-id
-    client-secret: your-kakao-client-secret
+    client-id: ${OAUTH_KAKAO_CLIENT_ID:}
+    client-secret: ${OAUTH_KAKAO_CLIENT_SECRET:}
 
 logging:
   level:
