@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface SocialAccountRepository extends JpaRepository<SocialAccount, Long> {
+public interface SocialAccountRepository extends JpaRepository<SocialAccount, String> {
 
     Optional<SocialAccount> findByProviderAndProviderId(AuthProvider provider, String providerId);
 
-    List<SocialAccount> findByMemberId(Long memberId);
+    List<SocialAccount> findByMemberId(String memberId);
 
     List<SocialAccount> findByMemberEmail(String email);
 }

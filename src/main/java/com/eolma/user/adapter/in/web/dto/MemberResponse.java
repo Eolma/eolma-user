@@ -5,7 +5,7 @@ import com.eolma.user.domain.model.Member;
 import java.time.Instant;
 
 public record MemberResponse(
-        Long id,
+        String id,
         String email,
         String nickname,
         String profileImage,

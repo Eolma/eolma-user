@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS member (
-    id              BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id              VARCHAR(36) PRIMARY KEY,
     email           VARCHAR(255) NOT NULL UNIQUE,
     password_hash   VARCHAR(255),
     nickname        VARCHAR(50) UNIQUE,
@@ -14,8 +14,8 @@ CREATE INDEX IF NOT EXISTS idx_member_email ON member(email);
 CREATE INDEX IF NOT EXISTS idx_member_nickname ON member(nickname);
 
 CREATE TABLE IF NOT EXISTS social_account (
-    id              BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    member_id       BIGINT NOT NULL REFERENCES member(id),
+    id              VARCHAR(36) PRIMARY KEY,
+    member_id       VARCHAR(36) NOT NULL REFERENCES member(id),
     provider        VARCHAR(20) NOT NULL,
     provider_id     VARCHAR(255) NOT NULL,
     created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),

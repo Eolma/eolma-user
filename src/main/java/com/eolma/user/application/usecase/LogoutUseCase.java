@@ -18,7 +18,7 @@ public class LogoutUseCase {
         this.refreshTokenStore = refreshTokenStore;
     }
 
-    public void execute(Long memberId) {
+    public void execute(String memberId) {
         refreshTokenStore.delete(memberId);
         log.info("Member logged out: {}", kv("memberId", memberId));
     }

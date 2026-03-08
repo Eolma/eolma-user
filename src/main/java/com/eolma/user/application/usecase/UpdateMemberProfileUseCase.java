@@ -17,7 +17,7 @@ public class UpdateMemberProfileUseCase {
     }
 
     @Transactional
-    public Member execute(Long memberId, String nickname, String profileImage) {
+    public Member execute(String memberId, String nickname, String profileImage) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new EolmaException(ErrorType.USER_NOT_FOUND,
                         "Member not found: " + memberId));

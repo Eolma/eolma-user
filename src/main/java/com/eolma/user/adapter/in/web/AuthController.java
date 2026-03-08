@@ -51,7 +51,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Void> logout(@AuthenticationPrincipal Long memberId) {
+    public ResponseEntity<Void> logout(@AuthenticationPrincipal String memberId) {
         logoutUseCase.execute(memberId);
         return ResponseEntity.noContent().build();
     }

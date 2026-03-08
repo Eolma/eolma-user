@@ -35,7 +35,7 @@ public class RefreshTokenUseCase {
             throw new EolmaException(ErrorType.UNAUTHORIZED, "Invalid refresh token");
         }
 
-        Long memberId = tokenProvider.getMemberIdFromToken(refreshToken);
+        String memberId = tokenProvider.getMemberIdFromToken(refreshToken);
 
         String storedToken = refreshTokenStore.find(memberId)
                 .orElseThrow(() -> new EolmaException(ErrorType.UNAUTHORIZED,

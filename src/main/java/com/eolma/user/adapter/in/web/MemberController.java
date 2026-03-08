@@ -25,20 +25,20 @@ public class MemberController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PublicMemberResponse> getPublicProfile(@PathVariable Long id) {
+    public ResponseEntity<PublicMemberResponse> getPublicProfile(@PathVariable String id) {
         Member member = getMemberProfileUseCase.execute(id);
         return ResponseEntity.ok(PublicMemberResponse.from(member));
     }
 
     @GetMapping("/me")
-    public ResponseEntity<MemberResponse> getMyProfile(@AuthenticationPrincipal Long memberId) {
+    public ResponseEntity<MemberResponse> getMyProfile(@AuthenticationPrincipal String memberId) {
         Member member = getMemberProfileUseCase.execute(memberId);
         return ResponseEntity.ok(MemberResponse.from(member));
     }
 
     @PutMapping("/me")
     public ResponseEntity<MemberResponse> updateMyProfile(
-            @AuthenticationPrincipal Long memberId,
+            @AuthenticationPrincipal String memberId,
             @Valid @RequestBody UpdateProfileRequest request) {
         Member member = updateMemberProfileUseCase.execute(
                 memberId, request.nickname(), request.profileImage());

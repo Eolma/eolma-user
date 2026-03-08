@@ -20,7 +20,7 @@ public class RefreshTokenStore {
         this.refreshTokenTtl = Duration.ofMillis(jwtConfig.getRefreshTokenExpiration());
     }
 
-    public void save(Long memberId, String refreshToken) {
+    public void save(String memberId, String refreshToken) {
         redisTemplate.opsForValue().set(
                 KEY_PREFIX + memberId,
                 refreshToken,
@@ -28,13 +28,13 @@ public class RefreshTokenStore {
         );
     }
 
-    public Optional<String> find(Long memberId) {
+    public Optional<String> find(String memberId) {
         return Optional.ofNullable(
                 redisTemplate.opsForValue().get(KEY_PREFIX + memberId)
         );
     }
 
-    public void delete(Long memberId) {
+    public void delete(String memberId) {
         redisTemplate.delete(KEY_PREFIX + memberId);
     }
 }

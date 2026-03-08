@@ -69,7 +69,7 @@ public class RegisterMemberUseCase {
         DomainEvent<UserRegisteredEvent> event = DomainEvent.create(
                 EventType.USER_REGISTERED,
                 "user-service",
-                String.valueOf(member.getId()),
+                member.getId(),
                 "Member",
                 payload
         );

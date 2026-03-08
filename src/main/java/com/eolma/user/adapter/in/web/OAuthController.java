@@ -45,7 +45,7 @@ public class OAuthController {
 
     @PostMapping("/nickname")
     public ResponseEntity<LoginResponse> setNickname(
-            @AuthenticationPrincipal Long memberId,
+            @AuthenticationPrincipal String memberId,
             @Valid @RequestBody SetNicknameRequest request) {
         LoginResponse response = setNicknameUseCase.execute(memberId, request.nickname());
         return ResponseEntity.ok(response);
@@ -53,7 +53,7 @@ public class OAuthController {
 
     @GetMapping("/accounts")
     public ResponseEntity<List<LinkedAccountResponse>> getLinkedAccounts(
-            @AuthenticationPrincipal Long memberId) {
+            @AuthenticationPrincipal String memberId) {
         List<LinkedAccountResponse> accounts = getLinkedAccountsUseCase.execute(memberId);
         return ResponseEntity.ok(accounts);
     }

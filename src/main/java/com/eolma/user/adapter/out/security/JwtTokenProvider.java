@@ -34,7 +34,7 @@ public class JwtTokenProvider implements TokenProvider {
         Date expiry = new Date(now.getTime() + accessTokenExpiration);
 
         return Jwts.builder()
-                .subject(String.valueOf(member.getId()))
+                .subject(member.getId())
                 .claim("email", member.getEmail())
                 .claim("nickname", member.getNickname())
                 .claim("role", member.getRole().name())
@@ -50,7 +50,7 @@ public class JwtTokenProvider implements TokenProvider {
         Date expiry = new Date(now.getTime() + refreshTokenExpiration);
 
         return Jwts.builder()
-                .subject(String.valueOf(member.getId()))
+                .subject(member.getId())
                 .issuedAt(now)
                 .expiration(expiry)
                 .signWith(secretKey)
@@ -58,13 +58,13 @@ public class JwtTokenProvider implements TokenProvider {
     }
 
     @Override
-    public Long getMemberIdFromToken(String token) {
+    public String getMemberIdFromToken(String token) {
         Claims claims = Jwts.parser()
                 .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
-        return Long.parseLong(claims.getSubject());
+        return claims.getSubject();
     }
 
     @Override

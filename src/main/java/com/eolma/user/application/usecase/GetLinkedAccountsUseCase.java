@@ -18,7 +18,7 @@ public class GetLinkedAccountsUseCase {
     }
 
     @Transactional(readOnly = true)
-    public List<LinkedAccountResponse> execute(Long memberId) {
+    public List<LinkedAccountResponse> execute(String memberId) {
         List<SocialAccount> accounts = socialAccountRepository.findByMemberId(memberId);
         return accounts.stream()
                 .map(LinkedAccountResponse::from)

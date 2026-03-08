@@ -32,7 +32,7 @@ public class SetNicknameUseCase {
     }
 
     @Transactional
-    public LoginResponse execute(Long memberId, String nickname) {
+    public LoginResponse execute(String memberId, String nickname) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new EolmaException(ErrorType.NOT_FOUND,
                         "Member not found"));

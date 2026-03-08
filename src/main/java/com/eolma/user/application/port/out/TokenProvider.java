@@ -8,7 +8,7 @@ public interface TokenProvider {
 
     String createRefreshToken(Member member);
 
-    Long getMemberIdFromToken(String token);
+    String getMemberIdFromToken(String token);
 
     boolean validateToken(String token);
 }
