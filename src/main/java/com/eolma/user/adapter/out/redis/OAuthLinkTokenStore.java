@@ -3,9 +3,10 @@ package com.eolma.user.adapter.out.redis;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import com.eolma.common.id.TsidGenerator;
+
 import java.time.Duration;
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 public class OAuthLinkTokenStore {
@@ -20,7 +21,7 @@ public class OAuthLinkTokenStore {
     }
 
     public String createToken(String email) {
-        String token = UUID.randomUUID().toString();
+        String token = TsidGenerator.generate();
         redisTemplate.opsForValue().set(KEY_PREFIX + token, email, TTL);
         return token;
     }

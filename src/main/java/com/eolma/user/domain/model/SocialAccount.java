@@ -5,8 +5,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import com.eolma.common.id.TsidGenerator;
+
 import java.time.Instant;
-import java.util.UUID;
 
 @Entity
 @Table(name = "social_account")
@@ -15,13 +16,13 @@ import java.util.UUID;
 public class SocialAccount {
 
     @Id
-    @Column(length = 36)
+    @Column(length = 13)
     private String id;
 
     @PrePersist
     public void generateId() {
         if (this.id == null) {
-            this.id = UUID.randomUUID().toString();
+            this.id = TsidGenerator.generate();
         }
     }
 

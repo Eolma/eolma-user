@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS member (
-    id              VARCHAR(36) PRIMARY KEY,
+    id              VARCHAR(13) PRIMARY KEY,
     email           VARCHAR(255) NOT NULL UNIQUE,
     password_hash   VARCHAR(255),
     nickname        VARCHAR(50) UNIQUE,
@@ -14,8 +14,8 @@ CREATE INDEX IF NOT EXISTS idx_member_email ON member(email);
 CREATE INDEX IF NOT EXISTS idx_member_nickname ON member(nickname);
 
 CREATE TABLE IF NOT EXISTS social_account (
-    id              VARCHAR(36) PRIMARY KEY,
-    member_id       VARCHAR(36) NOT NULL REFERENCES member(id),
+    id              VARCHAR(13) PRIMARY KEY,
+    member_id       VARCHAR(13) NOT NULL REFERENCES member(id),
     provider        VARCHAR(20) NOT NULL,
     provider_id     VARCHAR(255) NOT NULL,
     created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -25,6 +25,6 @@ CREATE TABLE IF NOT EXISTS social_account (
 CREATE INDEX IF NOT EXISTS idx_social_account_member ON social_account(member_id);
 
 CREATE TABLE IF NOT EXISTS processed_event (
-    event_id     VARCHAR(36) PRIMARY KEY,
+    event_id     VARCHAR(13) PRIMARY KEY,
     processed_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

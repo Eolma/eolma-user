@@ -6,8 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import com.eolma.common.id.TsidGenerator;
+
 import java.time.Instant;
-import java.util.UUID;
 
 @Entity
 @Table(name = "member")
@@ -16,13 +17,13 @@ import java.util.UUID;
 public class Member {
 
     @Id
-    @Column(length = 36)
+    @Column(length = 13)
     private String id;
 
     @PrePersist
     public void generateId() {
         if (this.id == null) {
-            this.id = UUID.randomUUID().toString();
+            this.id = TsidGenerator.generate();
         }
     }
 
